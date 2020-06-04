@@ -1,4 +1,4 @@
-import '../lib/bip32.dart' as bip32;
+import '../lib/bip32_hdac.dart' as bip32;
 import 'package:hex/hex.dart';
 
 main() {

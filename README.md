@@ -1,13 +1,13 @@
-# bip32
+# bip32_hdac
 
-A [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) compatible library for Flutter writing in Dart.
+Forked [bip32 1.0.5](https://pub.dev/packages/bip32) compatible library for Flutter writing in Dart.
 
-Inspired by [bitcoinjs](https://github.com/bitcoinjs/bip32)
+[bip32 1.0.5](https://pub.dev/packages/bip32) is different from github.com/cosmos/go-bip39 during the deriver process.
 
 ## Example
 ```dart
 
-import 'package:bip32/bip32.dart' as bip32;
+import 'package:bip32_hdac/bip32.dart' as bip32;
 import 'package:hex/hex.dart';
 
 main() {

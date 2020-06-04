@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import '../lib/bip32.dart';
+import '../lib/bip32_hdac.dart';
 import 'package:hex/hex.dart';
 import 'package:test/test.dart';
 import 'dart:io';
@@ -178,6 +178,23 @@ void main() {
     expect(HEX.encode(node.sign(hash)), sigStr);
     expect(node.verify(hash, signature), true);
     expect(node.verify(seed, signature), false);
+  });
+
+  test("derive", () {
+    Uint8List seed = HEX.decode("5f13b32be2492c3a5806b11c5ece047047f3fc3f38159f291a9b6c4ff5dd504a8a50d46e72200406061955245d07bdd8dc6666916753fc7fd32a0195a2d78988");
+    BIP32 root = BIP32.fromSeed(seed);
+    root = root.derivePath("m/44'/1217'/0'/0/0");
+    expect(HEX.encode(root.privateKey), "52351cb4356d9f374a9e25bfb57911b1d8b410d9196af174b5051e7cead0b8c6");
+
+    Uint8List seed2 = HEX.decode("c2c51156714b94b21bc3ad48b865d3e86e2cdcb93f1990da5986bfbbffdec5e282ac825d9f2b86da566324a4d5bdd760315778820f8dc181e56d905549eec801");
+    BIP32 root2 = BIP32.fromSeed(seed2);
+    root2 = root2.derivePath("m/44'/1217'/0'/0/0");
+    expect(HEX.encode(root2.privateKey), "56307d38deb07ecb11f5d38ced3eefa164e4fc2f6293119f0c765b3b3b9153b0");
+
+    Uint8List seed3 = HEX.decode("f5db3b36cbbd80b9988cd01eda04333ab8159db2b53e79f34ca8ca09caeca47e3d666fb93a19bbd7d7fec13933d2a3fce2582b32ac63e1755b7f789db499a73f");
+    BIP32 root3 = BIP32.fromSeed(seed3);
+    root3 = root3.derivePath("m/44'/1217'/0'/0/0");
+    expect(HEX.encode(root3.privateKey), "bd0e8f48c1bde66914073b5b20279481f27dce36ec2c164bca29944f3f6a08ad");
   });
 }
 void verify(BIP32 hd, prv, f, network) {

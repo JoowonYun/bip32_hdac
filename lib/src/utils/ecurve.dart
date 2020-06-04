@@ -105,10 +105,10 @@ Uint8List privateAdd (Uint8List d,Uint8List tweak) {
   BigInt dd = fromBuffer(d);
   BigInt tt = fromBuffer(tweak);
   Uint8List dt = toBuffer((dd + tt) % n);
-  if(dt.length != 32) {
-    dt.setRange(1, 32, dt);
-    dt[0] = 0x00;
-  }
+  Uint8List dt2 = new Uint8List(32);
+  dt2.setRange(32 - dt.length, 32, dt);
+  dt = dt2;
+  
   if (!isPrivate(dt)) return null;
   return dt;
 }
